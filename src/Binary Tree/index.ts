@@ -4,7 +4,7 @@ class BinaryTree {
   right: BinaryTree | null;
   constructor(
     value: number,
-    leftNode: BinaryTree | null,
+    leftNode: BinaryTree | null = null,
     rightNode: BinaryTree | null = null
   ) {
     this.value = value;
