@@ -81,3 +81,6 @@ const helper = (
 };
 
 console.log(nQueens(5));
+
+// Further optimize the solution by using set to track the queens position
+// ex : if the queen is placed at row : 2 , col = 2, add rowSet = {2} , add colSet = {2} add UpDiagonal = {col + row} , add DownDiagonal = {row - set}
