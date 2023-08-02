@@ -84,8 +84,11 @@ class FreqStack2 {
   }
 }
 
-
-
+// Trick used :
+// hashmap to store the frequency of each element
+// hashmap to store each occurance of each frequency
+// Ex : 1 : [2,4,5] 2 : [5,6,7]
+// using a maxCounter to track the most frequent array
 
 const freqStack = new FreqStack2();
 
