@@ -43,6 +43,9 @@ class FreqStack {
   }
 }
 
+// TIME COMPLEXITY : O(N) because iterating through the popped array
+// SPACE COMPLEXITY : O(1) because  store the elements in a stack and a set (uneccesary)
+
 class FreqStack2 {
   arr: number[][];
   hashMap: { [key: string]: number };
@@ -81,12 +84,8 @@ class FreqStack2 {
   }
 }
 
-// Time Complexity :
-// push : O(n)
-// pop : O(1)
 
-// Space Complexity :
-// push and pop : O(n) uses hashmap
+
 
 const freqStack = new FreqStack2();
 

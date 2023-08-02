@@ -41,8 +41,8 @@ const validateStackSequences = (
   return true;
 };
 
-// TIME COMPLEXITY : O(N) because iterating through the popped array
-// SPACE COMPLEXITY : O(1) because  store the elements in a stack and a set (uneccesary)
+// TIME COMPLEXITY : O(n) because iterating through the popped array
+// SPACE COMPLEXITY : O(n) because  store the elements in a stack and a set (uneccesary)
 
 // Approach 2
 
@@ -66,3 +66,15 @@ const validateStackSequences2 = (pushed: number[], popped: number[]) => {
 };
 
 console.log(validateStackSequences2([1, 2, 3, 4, 5], [4, 5, 2, 3, 1]));
+
+// TIME COMPLEXITY : O(n) because iterating through the popped array
+// SPACE COMPLEXITY : O(n) because  store the elements in a stack
+// without the redundant set
+
+// Trick used :
+// 1. iterating through the pushed array to push the element in the order
+// if the popped array element is the same as top of the stack
+// then pop the stack 
+
+// Since it was said that popped array and pushed array are the same size , then in the end the stack must be empty
+// therefore we could just check whether the stack is empty to identify whether the sequence is valid
