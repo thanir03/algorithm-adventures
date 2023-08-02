@@ -20,6 +20,7 @@ class Queue {
     if (!this.head) {
       this.head = newNode;
       this.tail = newNode;
+      return;
     }
     if (this.tail) {
       this.tail.next = newNode;
@@ -28,17 +29,31 @@ class Queue {
   }
 
   shift() {
+    if(this.isEmpty()) return null;
     let removedValue: number | null = null;
     if (this.head) {
       removedValue = this.head.value;
       this.head = this.head.next;
-      if (this.head === null) this.tail = null;
     }
     return removedValue;
   }
+  getNode(index : number){
+    let count =0;
+    let currentNode = this.head;
+    while(count < index && currentNode){
+      count++
+    }
+    if(currentNode){
+      return currentNode.value
+    }else return null;
+
+  }
 
   print() {
-    if (!this.head) return;
+    if (!this.head) {
+      console.log("")
+      return; 
+    }
     let str = "";
     let currentNode: LinkedListNode | null = this.head;
     while (currentNode) {
@@ -47,14 +62,10 @@ class Queue {
     }
     console.log(str.slice(0, -1));
   }
+
+  isEmpty(){
+    return this.head === null;
+    } 
 }
 
-const queue = new Queue();
-queue.push(1);
-queue.push(2);
-queue.push(3);
-queue.push(4);
-console.log(queue.shift());
-console.log(queue.shift());
-console.log(queue.shift());
-queue.print();
+export { Queue, LinkedListNode }

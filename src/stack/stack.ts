@@ -1,8 +1,12 @@
-class Stack<T = number> {
-  stack: Array<T> = [];
+export class Stack<T = number> {
+  private stack: Array<T> = [];
 
   constructor() {
     this.stack = [];
+  }
+
+  print() {
+    console.log(this.stack);
   }
 
   push(value: T) {
