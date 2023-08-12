@@ -1,44 +1,73 @@
 // Dinner Plate Stacks problem
 
+import { MinHeap } from "../Heap/Heap.js";
+
 // Solution works by using an array to store each stack
 // But the Time Complexity is not efficient
 
 class DinnerPlates {
   private array: Array<Array<number>> = [];
   private capacity: number;
+  private heap: MinHeap = new MinHeap(); // to store index of minimum index to be pushed into the array
   constructor(capacity: number) {
     this.capacity = capacity;
   }
 
+  // add value to the left most stack in the array
   push(val: number): void {
-    let isValueAdded = false;
-    for (let stack of this.array) {
-      if (stack.length != this.capacity) {
-        stack.push(val);
-        isValueAdded = true;
-        break;
+    // remove the lowest heap index if the index is not in range
+    while (
+      this.heap.heap.length > 0 &&
+      this.heap.getMin() > this.array.length - 1
+    ) {
+      this.heap.deleteMin();
+    }
+    // if minimum index in heap exist
+    if (!this.heap.isEmpty()) {
+      const minIndex = this.heap.getMin();
+      this.array[minIndex].push(val);
+      if (this.array[minIndex].length === this.capacity) {
+        this.heap.deleteMin();
       }
+      return;
     }
-    if (isValueAdded == false) {
-      this.array.push([val]);
+    // if the last array is not full
+    if (
+      this.array.length > 0 &&
+      this.array[this.array.length - 1].length < this.capacity
+    ) {
+      this.array[this.array.length - 1].push(val);
+      return;
     }
+    // addding a new stack
+    this.array.push([val]);
   }
 
-  // Time Complexity : O(n) to move backward till a non empty stack is found
+  // pop the rightMost stack which is not empty
   pop(): number {
-    if (this.array.length === 0) return -1;
-    let r = this.array.length - 1;
-    while (r >= 0 && this.array[r].length === 0) {
-      r--;
+    if (this.array.length === 0) {
+      console.log(-1);
+      return -1;
+    }
+    // if the array length is zero in the end , remove those stacks
+    while (
+      this.array.length > 0 &&
+      this.array[this.array.length - 1].length === 0
+    ) {
+      this.array.pop();
     }
     let res = -1;
-    if (r >= 0) {
-      res = this.array[r].pop()!;
+    // if the elements exist in the array , then pop the last element of the array
+    if (this.array.length > 0) {
+      res = this.array[this.array.length - 1].pop()!;
+      if (this.array[this.array.length - 1].length === 0) {
+        this.array.pop();
+      }
     }
     return res;
   }
 
-  // Time Complexity : O(1)
+  // pop the stack at the index
   popAtStack(index: number): number {
     if (index >= this.array.length) {
       return -1;
@@ -46,6 +75,9 @@ class DinnerPlates {
     const selectedStack = this.array[index];
     if (selectedStack.length === 0) {
       return -1;
+    }
+    if (selectedStack.length === this.capacity) {
+      this.heap.insert(index);
     }
     const res = selectedStack.pop()!;
     return res;
@@ -56,40 +88,17 @@ const testing = () => {
   const operations = [
     "push",
     "push",
-    "push",
-    "push",
-    "push",
-    "popAtStack",
-    "push",
-    "push",
-    "popAtStack",
     "popAtStack",
     "pop",
-    "pop",
-    "pop",
+    "push",
+    "push",
     "pop",
     "pop",
   ];
-  const value = [
-    [1],
-    [2],
-    [3],
-    [4],
-    [7],
-    [8],
-    [20],
-    [21],
-    [0],
-    [2],
-    [],
-    [],
-    [],
-    [],
-    [],
-  ];
-
-  const d = new DinnerPlates(2);
+  const value = [[1], [2], [1], [], [1], [2], [], []];
+  const d = new DinnerPlates(1);
   for (let i = 0; i < operations.length; i++) {
+    console.log("Operation : ", i + 1);
     if (operations[i] === "push") {
       d.push(value[i][0]);
     } else if (operations[i] === "popAtStack") {
@@ -101,4 +110,3 @@ const testing = () => {
 };
 
 testing();
-``
