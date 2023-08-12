@@ -1,5 +1,8 @@
 // Design Browser History
-
+import {
+  DoublyLinkedListNode,
+  DoublyLinkedList,
+} from "../LinkedList/LinkedList.js";
 // Very inefficient
 // Need to iterate through stack to go back items
 class BrowserHistory {
@@ -47,7 +50,50 @@ class BrowserHistory {
   }
 }
 
-const browserHistory = new BrowserHistory("leetcode");
+// LinkedList
+
+class BrowserHistory2 {
+  currentURL: DoublyLinkedListNode<string>;
+  urlList: DoublyLinkedList<string>;
+  constructor(url: string) {
+    this.currentURL = new DoublyLinkedListNode<string>(url);
+    this.urlList = new DoublyLinkedList(this.currentURL, this.currentURL);
+    this.currentURL.next = null;
+    this.currentURL.prev = null;
+  }
+
+  visit(url: string) {
+    const newURL: DoublyLinkedListNode<string> =
+      new DoublyLinkedListNode<string>(url);
+    this.currentURL.next = newURL;
+    newURL.prev = this.currentURL;
+    newURL.next = null;
+    this.currentURL = newURL;
+    this.urlList.tail = this.currentURL;
+  }
+
+  back(steps: number): string {
+    let i = 0;
+    while (this.currentURL.prev != null && i < steps) {
+      this.currentURL = this.currentURL.prev;
+      i++;
+    }
+    console.log(this.currentURL.value);
+    return this.currentURL.value;
+  }
+
+  forward(steps: number) {
+    let i = 0;
+    while (this.currentURL.next != null && i < steps) {
+      this.currentURL = this.currentURL.next;
+      i++;
+    }
+    console.log(this.currentURL.value);
+    return this.currentURL.value;
+  }
+}
+
+const browserHistory = new BrowserHistory2("leetcode");
 browserHistory.visit("google");
 browserHistory.visit("facebook");
 browserHistory.visit("youtube");
