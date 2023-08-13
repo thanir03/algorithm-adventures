@@ -1,6 +1,6 @@
 class SinglyLinkedListNode<E> {
   value: E;
-  next: SinglyLinkedList<E> | null = null;
+  next: SinglyLinkedListNode<E> | null = null;
   constructor(value: E) {
     this.value = value;
   }
