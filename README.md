@@ -10,7 +10,7 @@ Welcome to the Data Structures and Algorithms Repository! This repository contai
 
 ## Languages and Tools
 
-All of the questions are solved using typescript or javascript. 
+All of the questions are solved using typescript, javascript or java. 
 
 
 ## Topics for Data Structures and Algorithms
