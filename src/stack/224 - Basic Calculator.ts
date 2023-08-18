@@ -82,6 +82,9 @@ const calculate2 = (str: string) => {
   while (i < str.length) {
     let char = str[i];
     if (char === "(") {
+      // new parentheses is encountered
+      // need to reset the state
+      // the remaining sum is pushed to the array
       stack.push([result, operationSign]);
       result = 0;
       operationSign = 1;
@@ -92,7 +95,7 @@ const calculate2 = (str: string) => {
       operationSign = 1;
     } else if (char === "-") {
       operationSign = -1;
-    } else if (char >= "0") {
+    } else if (char >= "0" && char <= "9") {
       // to check whether char is number
       let j = i;
       let num = 0;
@@ -101,8 +104,7 @@ const calculate2 = (str: string) => {
         j++;
       }
       result = result + operationSign * num;
-      i = j;
-      continue;
+      i = j - 1;
     }
     i++;
   }
@@ -146,3 +148,5 @@ const calculate2WithRecursion = (
 };
 
 console.log(calculate3("(1+(4+5+2)-3)+(6+8)"));
+
+export {};
