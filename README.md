@@ -19,7 +19,7 @@ All of the questions are solved using typescript, javascript or java.
 - **Binary Tree:**
 - **Binary Tree:**
 - **Array**
-- Current Learning Heap/Priority Queue
+- Current Learning :  Heap/Priority Queue
   
 ## Learning Resources
 
