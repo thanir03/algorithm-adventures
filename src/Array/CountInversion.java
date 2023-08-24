@@ -1,7 +1,7 @@
 // Given an array , find the count that i< j and arr[i] > arr[j]
 // Initial approach is nested loop to iterate to find every occurance of the right of each element 
-// But the more optimized solution uses merge sort and while merging two arrays in 
-// In merge sort , the index of merge sort will definitely not not be greater than left array
+// But the more optimized solution uses merge sort and while merging two sorted arrays 
+// In merge sort , the index of left array will definitely not be greater than left array
 // and the left array and right array is sorted but the index of left array is smaller than right array
 // therefore, we could easily detect the element in the left array that is greater than right array
 
