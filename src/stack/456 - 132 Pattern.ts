@@ -26,8 +26,8 @@ const find132pattern = (nums: number[]) => {
 
 // Stack is to store the j value (the highest value)
 
-// Find the maximum possible value for k to ensure that k is lower than i 
-// However , we need to compare it with j so that k value is 
+// Find the maximum possible value for k to ensure that k is lower than i
+// However , we need to compare it with j so that k value is
 
 const find132pattern2 = (nums: number[]) => {
   const lowest = []; // carries the i value
@@ -51,5 +51,29 @@ const find132pattern2 = (nums: number[]) => {
   return false;
 };
 
-const testcase = [3, 1, 4, 2];
-console.log(find132pattern2(testcase));
+const find132Pattern3 = (nums: number[]): boolean => {
+  // using stack to track the j element (highest element)
+  // monotonic decreasing
+  // tracking highest j values and min value of each j value
+  const stackJ: [number, number][] = []; // [j , i]
+  let min = Infinity;
+  for (let k = 0; k < nums.length; k++) {
+    while (stackJ.length > 0 && nums[k] > stackJ[stackJ.length - 1][0]) {
+      stackJ.pop();
+    }
+    // now we have could have possibly encountered higher element
+    if (
+      stackJ.length > 0 &&
+      stackJ[stackJ.length - 1][0] > nums[k] &&
+      nums[k] > stackJ[stackJ.length - 1][1]
+    ) {
+      return true;
+    }
+    stackJ.push([nums[k], min]);
+    min = Math.min(nums[k], min);
+  }
+  return false;
+};
+
+const testcase = [1, -1, 1, -4, 0];
+console.log(find132Pattern3(testcase));
